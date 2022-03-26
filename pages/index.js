@@ -6,7 +6,7 @@ import KeyBoard from '../components/KeyBoard'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[.25fr_2fr_1.5fr] h-screen">
+    <div className="grid grid-rows-[.25fr_2fr_1.5fr] border border-yellow-200 h-screen">
         <Nav />
         <Board attempts={6}/>
         <KeyBoard />

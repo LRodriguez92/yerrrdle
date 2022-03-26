@@ -8,8 +8,8 @@ export default function Board(props) {
     }
 
     return (
-        <div className="border border-red-900 h-full flex justify-center items-center">
-            <div className="flex flex-col items-center justify-center border border-green-900">
+        <div className="border border-red-900 flex justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
                 {rows}
             </div>
         </div>
