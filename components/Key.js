@@ -1,17 +1,23 @@
 export default function Key(props) {
     return (
         <div className={`
-            border 
-            border-red-400 
-            ${props.char === "ENTER" || props.char === "DELETE" ? 'w-16' : 'w-9'} 
+            rounded 
+            bg-gray-400
+            text-white
+            ${props.char === "ENTER" || props.char.type === "svg" ? 'w-16' : 'w-9'} 
             h-14 
             m-0.5
             flex
             justify-center
             items-center
+            font-sans
+            font-bold
             `}
         >
             {props.char}
         </div>
     )
 }
+
+
+
