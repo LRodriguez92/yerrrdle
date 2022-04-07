@@ -1,6 +1,6 @@
 import Key from './Key'
 
-export default function KeyBoard() {
+export default function KeyBoard(props) {
     const characters = [
         "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", 
         "A", "S", "D", "F", "G", "H", "J", "K", "L",
@@ -10,7 +10,11 @@ export default function KeyBoard() {
     ]
 
     const keys = characters.map((char, index) => {
-        return <Key char={char} key={index}/>
+        return <Key 
+            key={index}
+            char={char} 
+            setGuessedWord={props.setGuessedWord}
+        />
     })
 
     return (

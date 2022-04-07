@@ -2,8 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState, useEffect } from "react"
 import Nav from '../components/Nav'
-import Board from '../components/Board'
-import KeyBoard from '../components/KeyBoard'
+import Board from '../components/Board/Board'
+import KeyBoard from '../components/Keyboard/KeyBoard'
 
 export default function Home() {
 
@@ -32,7 +32,7 @@ export default function Home() {
         <Board attempts={6} word={word}/>
       </div>
       <div className="">
-        <KeyBoard />
+        <KeyBoard guessedWord={guessedWord} setGuessedWord={setGuessedWord}/>
       </div>       
     </div>
   )
