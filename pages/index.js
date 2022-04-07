@@ -29,7 +29,7 @@ export default function Home() {
       // Check if word is a legit word
         // If legit word: check if the letters belongs to word
           checkLetters(guessedWord, wordToGuess)
-          checkWin()
+          checkWin(guessedWord, wordToGuess)
           setAllGuesses(prevState => [...prevState, guessedWord])
           setGuessedWord([])
           setGuessRow(prevState => prevState + 1)  
@@ -37,7 +37,7 @@ export default function Home() {
       // If not legit word: show alert
 
     } else {
-      console.error("Type the full word")
+      alert("Type the full word")
       // TODO: disable the Enter key
     }  
   }
@@ -60,8 +60,14 @@ export default function Home() {
     })
   }
 
-  const checkWin = () => {
+  const checkWin = (guess, word) => {
     console.log("Checking win condition...");
+
+    if (guess.join('') === word.join('')) {
+      console.log("You win!");
+    } else {
+      console.log("Wrong guess");
+    }
   }
   
   const checkGameOver = (row, attempts) => {
