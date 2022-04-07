@@ -7,24 +7,60 @@ import KeyBoard from '../components/Keyboard/KeyBoard'
 
 export default function Home() {
 
-  // const [gameState, setGameState] = useState({
-  //   guessAttempts: 0,
-  //   spaceInRow: 0,
-  //   word: ["F", "A", "C", "T", "S"],
-  //   guessedWord: [],
-  // })
-
-  const [guessAttempts, setGuessAttempts] = useState(0)
+  const [attempts, setAttempts] = useState(6)
+  const [guessRow, setGuessRow] = useState(0)
   const [spaceInRow, setSpaceInRow] = useState(0)
-  const [word, setWord] = useState([])
+  const [wordToGuess, setWordToGuess] = useState([])
   const [guessedWord, setGuessedWord] = useState([])
 
   useEffect(() => {
-    setWord(["F", "A", "C", "T", "S"])
-  }, [])
+    setWordToGuess(["F", "A", "C", "T", "S"])
+    checkGameOver(guessRow, attempts)
+  }, [guessRow])
 
-  const submitGuess = () => {
+  const submitGuess = async () => {
     console.log("Guessing...")
+    //TODO: Check if guessedWord is the same length as the word
+    if (guessedWord.length === wordToGuess.length) {
+      console.log("guess matches word length")
+      // TODO: enable the Enter key
+
+      // Check if word is a legit word
+        // If legit word: check if the letters belongs to word
+          // If the letter belongs to the word: check if letter is in the right index
+          checkLetters(guessedWord, wordToGuess)
+          await setGuessRow(prevState => prevState + 1)  
+
+      // If not legit word: show alert
+
+    } else {
+      console.error("Type the full word")
+      // TODO: disable the Enter key
+    }  
+  }
+
+  const checkLetters = (guess, word) => {
+    guess.forEach(letter => {
+      let indexFound = word.indexOf(letter)
+      if (indexFound >= 0) {
+        // Letter has been found
+        if (guess.indexOf(letter) === indexFound) {
+          console.log(`${letter} is in the correct place`)
+          // Color space green
+        } else {
+          console.log(`${letter} is in the wrong place`)
+          // Color space yellow
+        }
+      } else {
+        console.log(`${letter} not found`)
+      }
+    })
+  }
+  
+  const checkGameOver = (row, attempts) => {
+    if (row === attempts) {
+      console.log("Game Over!");
+    }
   }
 
   return (
@@ -33,11 +69,16 @@ export default function Home() {
         <Nav />
       </div>
       <div className="">
-        <Board attempts={6} word={word}/>
+        <Board 
+          attempts={attempts} 
+          guessRow={guessRow}
+          wordToGuess={wordToGuess}
+          guessedWord={guessedWord} 
+        />
       </div>
       <div className="">
         <KeyBoard 
-          word={word} 
+          wordToGuess={wordToGuess} 
           guessedWord={guessedWord} 
           setGuessedWord={setGuessedWord}
           submitGuess={submitGuess}

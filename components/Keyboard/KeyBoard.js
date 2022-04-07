@@ -10,7 +10,7 @@ export default function KeyBoard(props) {
     ]
 
     const handleClick = (letter) => {
-        if (props.guessedWord.length < props.word.length) {
+        if (props.guessedWord.length < props.wordToGuess.length) {
             props.setGuessedWord(prevState => [...prevState, letter])
         } else {
             console.log("Reached the max number of letters!");
