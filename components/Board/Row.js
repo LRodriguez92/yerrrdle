@@ -7,7 +7,7 @@ export default function Row(props) {
     const letters = []
 
     for (let i = 0; i < count; i++) {
-        letters.push(<Letter letter={props.word[i]}/>)
+        letters.push(<Letter letter={props.word[i]} key={i}/>)
     }
 
     

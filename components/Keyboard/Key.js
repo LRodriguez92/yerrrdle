@@ -13,7 +13,7 @@ export default function Key(props) {
             font-sans
             font-bold
             `}
-            onClick={() => props.handleClick(props.char)}
+            onClick={props.char !== "ENTER" ? () => props.handleClick(props.char) : props.submitGuess}
         >
             {props.char}
         </div>

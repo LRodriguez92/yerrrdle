@@ -23,6 +23,10 @@ export default function Home() {
     setWord(["F", "A", "C", "T", "S"])
   }, [])
 
+  const submitGuess = () => {
+    console.log("Guessing...")
+  }
+
   return (
     <div className="bg-black grid grid-rows-[.35fr_3fr_1fr] h-screen">
       <div className="">
@@ -32,7 +36,12 @@ export default function Home() {
         <Board attempts={6} word={word}/>
       </div>
       <div className="">
-        <KeyBoard word={word} guessedWord={guessedWord} setGuessedWord={setGuessedWord}/>
+        <KeyBoard 
+          word={word} 
+          guessedWord={guessedWord} 
+          setGuessedWord={setGuessedWord}
+          submitGuess={submitGuess}
+          />
       </div>       
     </div>
   )

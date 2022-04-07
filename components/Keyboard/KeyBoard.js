@@ -23,6 +23,7 @@ export default function KeyBoard(props) {
             char={char} 
             setGuessedWord={props.setGuessedWord}
             handleClick={handleClick}
+            submitGuess={props.submitGuess}
         />
     })
 
