@@ -9,11 +9,20 @@ export default function KeyBoard(props) {
       </svg>
     ]
 
+    const handleClick = (letter) => {
+        if (props.guessedWord.length < props.word.length) {
+            props.setGuessedWord(prevState => [...prevState, letter])
+        } else {
+            console.log("Reached the max number of letters!");
+        }
+    }
+
     const keys = characters.map((char, index) => {
         return <Key 
             key={index}
             char={char} 
             setGuessedWord={props.setGuessedWord}
+            handleClick={handleClick}
         />
     })
 

@@ -32,7 +32,7 @@ export default function Home() {
         <Board attempts={6} word={word}/>
       </div>
       <div className="">
-        <KeyBoard guessedWord={guessedWord} setGuessedWord={setGuessedWord}/>
+        <KeyBoard word={word} guessedWord={guessedWord} setGuessedWord={setGuessedWord}/>
       </div>       
     </div>
   )

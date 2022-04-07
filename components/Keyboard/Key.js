@@ -13,6 +13,7 @@ export default function Key(props) {
             font-sans
             font-bold
             `}
+            onClick={() => props.handleClick(props.char)}
         >
             {props.char}
         </div>
