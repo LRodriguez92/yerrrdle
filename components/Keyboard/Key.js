@@ -1,6 +1,7 @@
 export default function Key(props) {
     return (
         <div className={`
+            focus:bg-gray-700
             rounded 
             bg-gray-400
             text-white
@@ -13,7 +14,12 @@ export default function Key(props) {
             font-sans
             font-bold
             `}
-            onClick={props.char !== "ENTER" ? () => props.handleClick(props.char) : props.submitGuess}
+            onClick={
+                props.char === "ENTER" ? 
+                props.submitGuess 
+                : (props.char.type === "svg" ? props.deleteLetter 
+                : () => props.handleClick(props.char))
+            }
         >
             {props.char}
         </div>

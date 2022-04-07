@@ -56,6 +56,7 @@ export default function Home() {
         }
       } else {
         console.log(`${letter} not found`)
+        // Color Gray
       }
     })
   }

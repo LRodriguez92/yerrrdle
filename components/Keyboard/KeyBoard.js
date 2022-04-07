@@ -17,6 +17,19 @@ export default function KeyBoard(props) {
         }
     }
 
+    const deleteLetter = () => {
+        console.log("Deleting letter");
+        let currentWord = props.guessedWord
+        if (currentWord.length > 1) {
+            props.setGuessedWord(prevState => {
+                const list = prevState.filter((item, i) => i !== prevState.length - 1);
+                return list
+            })
+        } else {
+            props.setGuessedWord([])
+        }
+    }
+
     const keys = characters.map((char, index) => {
         return <Key 
             key={index}
@@ -24,6 +37,7 @@ export default function KeyBoard(props) {
             setGuessedWord={props.setGuessedWord}
             handleClick={handleClick}
             submitGuess={props.submitGuess}
+            deleteLetter={deleteLetter}
         />
     })
 
