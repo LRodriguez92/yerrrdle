@@ -9,8 +9,8 @@ export default function KeyBoard() {
       </svg>
     ]
 
-    const keys = characters.map(char => {
-        return <Key char={char}/>
+    const keys = characters.map((char, index) => {
+        return <Key char={char} key={index}/>
     })
 
     return (
