@@ -6,7 +6,7 @@ export default function Board(props) {
         rows.push(<Row 
             key={i}
             wordToGuess={props.wordToGuess}
-            guessedWord={props.guessRow === i ? props.guessedWord : ''} 
+            guessedWord={props.guessRow === i ? props.guessedWord : (props.allGuesses[i] ? props.allGuesses[i] : '')} 
         />)
     }
 

@@ -10,6 +10,7 @@ export default function Home() {
   const [attempts, setAttempts] = useState(6)
   const [guessRow, setGuessRow] = useState(0)
   const [spaceInRow, setSpaceInRow] = useState(0)
+  const [allGuesses, setAllGuesses] = useState([])
   const [wordToGuess, setWordToGuess] = useState([])
   const [guessedWord, setGuessedWord] = useState([])
 
@@ -18,7 +19,7 @@ export default function Home() {
     checkGameOver(guessRow, attempts)
   }, [guessRow])
 
-  const submitGuess = async () => {
+  const submitGuess = () => {
     console.log("Guessing...")
     //TODO: Check if guessedWord is the same length as the word
     if (guessedWord.length === wordToGuess.length) {
@@ -27,9 +28,11 @@ export default function Home() {
 
       // Check if word is a legit word
         // If legit word: check if the letters belongs to word
-          // If the letter belongs to the word: check if letter is in the right index
           checkLetters(guessedWord, wordToGuess)
-          await setGuessRow(prevState => prevState + 1)  
+          checkWin()
+          setAllGuesses(prevState => [...prevState, guessedWord])
+          setGuessedWord([])
+          setGuessRow(prevState => prevState + 1)  
 
       // If not legit word: show alert
 
@@ -56,6 +59,10 @@ export default function Home() {
       }
     })
   }
+
+  const checkWin = () => {
+    console.log("Checking win condition...");
+  }
   
   const checkGameOver = (row, attempts) => {
     if (row === attempts) {
@@ -74,6 +81,7 @@ export default function Home() {
           guessRow={guessRow}
           wordToGuess={wordToGuess}
           guessedWord={guessedWord} 
+          allGuesses={allGuesses}
         />
       </div>
       <div className="">
