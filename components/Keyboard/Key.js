@@ -1,6 +1,6 @@
 export default function Key(props) {
     return (
-        <div className={`
+        <div id={props.char} className={`
             focus:bg-gray-700
             rounded 
             bg-gray-400

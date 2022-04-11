@@ -7,9 +7,9 @@ import KeyBoard from '../components/Keyboard/KeyBoard'
 
 export default function Home() {
   const colors = {
-    green: '#538D4E', 
-    yellow: '#B59F3C', 
-    gray: '#3A3A3B'
+    green: 'rgb(83, 141, 78)', 
+    yellow: 'rgb(181, 159, 60)', 
+    gray: 'rgb(58, 58, 59)'
   }
 
   const [attempts, setAttempts] = useState(6)
@@ -55,14 +55,17 @@ export default function Home() {
         // Letter has been found
         if (guessIndex === indexFound) {
           console.log(`${letter} is in the correct place`)
-          changeLetterColor(colors.green, elementId) // Green
+          changeLetterColor(colors.green, elementId)
+          changeKeyColor(colors.green, letter, colors.green)
         } else {
           console.log(`${letter} is in the wrong place`)
-          changeLetterColor(colors.yellow, elementId) // Yellow
+          changeLetterColor(colors.yellow, elementId)
+          changeKeyColor(colors.yellow, letter, colors.green)
         }
       } else {
         console.log(`${letter} not found`)
-        changeLetterColor(colors.gray, elementId) // Gray
+        changeLetterColor(colors.gray, elementId)
+        changeKeyColor(colors.gray, letter, colors.green)
       }
     })
   }
@@ -71,7 +74,15 @@ export default function Home() {
     console.log(`Changing color to: ${color} on id: ${id}`);
     const el = document.getElementById(id)
     el.style.backgroundColor = color
-    // el.classList.add(`bg-${color}-500`)
+  }
+
+  const changeKeyColor = (color, letter, greenColor) => {
+    console.log(`Changing key color to: ${color} on id: ${letter}`);
+    const el = document.getElementById(letter)
+    console.log("color: ", el.style['background-color']);
+    if(el.style['background-color'] !== greenColor) {
+      el.style.backgroundColor = color
+    }
   }
 
   const checkWin = (guess, word) => {
