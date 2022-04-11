@@ -6,10 +6,15 @@ import Board from '../components/Board/Board'
 import KeyBoard from '../components/Keyboard/KeyBoard'
 
 export default function Home() {
+  const colors = {
+    green: '#538D4E', 
+    yellow: '#B59F3C', 
+    gray: '#3A3A3B'
+  }
 
   const [attempts, setAttempts] = useState(6)
+  const [numOfWordsGuessed, setNumOfWordsGuessed] = useState(0)
   const [guessRow, setGuessRow] = useState(0)
-  const [spaceInRow, setSpaceInRow] = useState(0)
   const [allGuesses, setAllGuesses] = useState([])
   const [wordToGuess, setWordToGuess] = useState([])
   const [guessedWord, setGuessedWord] = useState([])
@@ -21,44 +26,52 @@ export default function Home() {
 
   const submitGuess = () => {
     console.log("Guessing...")
-    //TODO: Check if guessedWord is the same length as the word
     if (guessedWord.length === wordToGuess.length) {
       console.log("guess matches word length")
       // TODO: enable the Enter key
 
-      // Check if word is a legit word
+      // TODO: Check if word is a legit word
         // If legit word: check if the letters belongs to word
-          checkLetters(guessedWord, wordToGuess)
+          checkLetters(guessedWord, wordToGuess, numOfWordsGuessed)
+          setNumOfWordsGuessed(numOfWordsGuessed + 1)
           checkWin(guessedWord, wordToGuess)
           setAllGuesses(prevState => [...prevState, guessedWord])
           setGuessedWord([])
           setGuessRow(prevState => prevState + 1)  
 
-      // If not legit word: show alert
+      // TODO: If not legit word: show alert
 
     } else {
-      alert("Type the full word")
-      // TODO: disable the Enter key
+      alert("Not enough letters")
     }  
   }
 
-  const checkLetters = (guess, word) => {
+  const checkLetters = (guess, word, numOfGuesses) => {
     guess.forEach(letter => {
       let indexFound = word.indexOf(letter)
+      let guessIndex = guess.indexOf(letter)
+      let elementId = numOfGuesses * 5 + guessIndex
       if (indexFound >= 0) {
         // Letter has been found
-        if (guess.indexOf(letter) === indexFound) {
+        if (guessIndex === indexFound) {
           console.log(`${letter} is in the correct place`)
-          // Color space green
+          changeLetterColor(colors.green, elementId) // Green
         } else {
           console.log(`${letter} is in the wrong place`)
-          // Color space yellow
+          changeLetterColor(colors.yellow, elementId) // Yellow
         }
       } else {
         console.log(`${letter} not found`)
-        // Color Gray
+        changeLetterColor(colors.gray, elementId) // Gray
       }
     })
+  }
+
+  const changeLetterColor = (color, id) => {
+    console.log(`Changing color to: ${color} on id: ${id}`);
+    const el = document.getElementById(id)
+    el.style.backgroundColor = color
+    // el.classList.add(`bg-${color}-500`)
   }
 
   const checkWin = (guess, word) => {
