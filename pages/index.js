@@ -47,9 +47,9 @@ export default function Home() {
   }
 
   const checkLetters = (guess, word, numOfGuesses) => {
-    guess.forEach(letter => {
+    guess.forEach((letter, i) => {
       let indexFound = word.indexOf(letter)
-      let guessIndex = guess.indexOf(letter)
+      let guessIndex = guess.indexOf(letter, i)
       let elementId = numOfGuesses * 5 + guessIndex
       if (indexFound >= 0) {
         // Letter has been found
@@ -79,8 +79,8 @@ export default function Home() {
   const changeKeyColor = (color, letter, greenColor) => {
     console.log(`Changing key color to: ${color} on id: ${letter}`);
     const el = document.getElementById(letter)
-    console.log("color: ", el.style['background-color']);
-    if(el.style['background-color'] !== greenColor) {
+
+    if(el.style['background-color'] !== greenColor) { // Keys that are already green, stay green
       el.style.backgroundColor = color
     }
   }
