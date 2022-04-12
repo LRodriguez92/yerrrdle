@@ -5,6 +5,7 @@ import Nav from '../components/Nav'
 import Board from '../components/Board/Board'
 import KeyBoard from '../components/Keyboard/KeyBoard'
 import Alert from '../components/Alert'
+import HowTo from '../components/HowTo'
 
 export default function Home() {
   const colors = {
@@ -22,6 +23,7 @@ export default function Home() {
   const [guessedWord, setGuessedWord] = useState([])
   const [clickable, setClickable] = useState(true)
 
+  const [howTo, setHowTo] = useState(false)
   const [alert, setAlert] = useState('')
 
   useEffect(() => {
@@ -113,10 +115,16 @@ export default function Home() {
     }
   }
 
+  const toggleHowTo = () => {
+    console.log("toggling how to");
+    setHowTo(!howTo)
+}
+
   return (
     <div className="bg-black grid grid-rows-[.35fr_3fr_1fr] h-screen">
+      {howTo ? <HowTo toggleHowTo={toggleHowTo}/> : null}
       <div className="">
-        <Nav />
+        <Nav toggleHowTo={toggleHowTo}/>
       </div>
       {alert ? <Alert alert={alert}/> : null}
       <div className="">
