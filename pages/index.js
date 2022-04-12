@@ -7,6 +7,7 @@ import KeyBoard from '../components/Keyboard/KeyBoard'
 
 export default function Home() {
   const colors = {
+    // Must be rgb values
     green: 'rgb(83, 141, 78)', 
     yellow: 'rgb(181, 159, 60)', 
     gray: 'rgb(58, 58, 59)'
@@ -18,6 +19,7 @@ export default function Home() {
   const [allGuesses, setAllGuesses] = useState([])
   const [wordToGuess, setWordToGuess] = useState([])
   const [guessedWord, setGuessedWord] = useState([])
+  const [clickable, setClickable] = useState(true)
 
   useEffect(() => {
     setWordToGuess(["F", "A", "C", "T", "S"])
@@ -28,13 +30,11 @@ export default function Home() {
     console.log("Guessing...")
     if (guessedWord.length === wordToGuess.length) {
       console.log("guess matches word length")
-      // TODO: enable the Enter key
-
       // TODO: Check if word is a legit word
         // If legit word: check if the letters belongs to word
           checkLetters(guessedWord, wordToGuess, numOfWordsGuessed)
           setNumOfWordsGuessed(numOfWordsGuessed + 1)
-          checkWin(guessedWord, wordToGuess)
+          checkWin(guessedWord, wordToGuess, setClickable)
           setAllGuesses(prevState => [...prevState, guessedWord])
           setGuessedWord([])
           setGuessRow(prevState => prevState + 1)  
@@ -85,19 +85,22 @@ export default function Home() {
     }
   }
 
-  const checkWin = (guess, word) => {
+  const checkWin = (guess, word, clickableMethod) => {
     console.log("Checking win condition...");
 
     if (guess.join('') === word.join('')) {
-      console.log("You win!");
+      alert("You win!");
+      clickableMethod(false)
+      // TODO: Make buttons unclickable
     } else {
       console.log("Wrong guess");
     }
   }
   
-  const checkGameOver = (row, attempts) => {
+  const checkGameOver = (row, attempts, clickableMethod) => {
     if (row === attempts) {
       console.log("Game Over!");
+      clickableMethod(false)
     }
   }
 
@@ -121,6 +124,7 @@ export default function Home() {
           guessedWord={guessedWord} 
           setGuessedWord={setGuessedWord}
           submitGuess={submitGuess}
+          clickable={clickable}
           />
       </div>       
     </div>

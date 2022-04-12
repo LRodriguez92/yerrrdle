@@ -38,6 +38,7 @@ export default function KeyBoard(props) {
             handleClick={handleClick}
             submitGuess={props.submitGuess}
             deleteLetter={deleteLetter}
+            clickable={props.clickable}
         />
     })
 

@@ -15,10 +15,12 @@ export default function Key(props) {
             font-bold
             `}
             onClick={
+                props.clickable ? 
                 props.char === "ENTER" ? 
                 props.submitGuess 
                 : (props.char.type === "svg" ? props.deleteLetter 
                 : () => props.handleClick(props.char))
+                : null
             }
         >
             {props.char}
