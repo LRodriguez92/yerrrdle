@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Nav from '../components/Nav'
 import Board from '../components/Board/Board'
 import KeyBoard from '../components/Keyboard/KeyBoard'
+import Alert from '../components/Alert'
 
 export default function Home() {
   const colors = {
@@ -21,9 +22,11 @@ export default function Home() {
   const [guessedWord, setGuessedWord] = useState([])
   const [clickable, setClickable] = useState(true)
 
+  const [alert, setAlert] = useState('')
+
   useEffect(() => {
     setWordToGuess(["F", "A", "C", "T", "S"])
-    checkGameOver(guessRow, attempts)
+    checkGameOver(guessRow, attempts, setClickable)
   }, [guessRow])
 
   const submitGuess = () => {
@@ -42,8 +45,13 @@ export default function Home() {
       // TODO: If not legit word: show alert
 
     } else {
-      alert("Not enough letters")
+      displayAlert("Not enough letters", setAlert)
     }  
+  }
+
+  const displayAlert = (message, alertSetter) => {
+    alertSetter(message)
+    setTimeout(() => alertSetter(''), 1500)
   }
 
   const checkLetters = (guess, word, numOfGuesses) => {
@@ -89,7 +97,7 @@ export default function Home() {
     console.log("Checking win condition...");
 
     if (guess.join('') === word.join('')) {
-      alert("You win!");
+      displayAlert("You win!", setAlert)
       clickableMethod(false)
       // TODO: Make buttons unclickable
     } else {
@@ -100,6 +108,7 @@ export default function Home() {
   const checkGameOver = (row, attempts, clickableMethod) => {
     if (row === attempts) {
       console.log("Game Over!");
+      displayAlert("Nice try!", setAlert)
       clickableMethod(false)
     }
   }
@@ -109,6 +118,7 @@ export default function Home() {
       <div className="">
         <Nav />
       </div>
+      {alert ? <Alert alert={alert}/> : null}
       <div className="">
         <Board 
           attempts={attempts} 
