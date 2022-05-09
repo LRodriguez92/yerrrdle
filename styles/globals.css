@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes rotate-letter {
+  0% {
+    transform: rotateX(0deg);
+    /* width: 20px;
+    height: 20px; */
+  }
+  50% {
+    transform: rotateX(90deg);
+    /* width: 30px;
+    height: 30px; */
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.change {
+  color: green;
+  font-size: 100px;
+}

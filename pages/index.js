@@ -7,6 +7,8 @@ import KeyBoard from '../components/Keyboard/KeyBoard'
 import Alert from '../components/Alert'
 import HowTo from '../components/HowTo'
 
+// import '../styles/Home.module.css'
+
 export default function Home() {
   const colors = {
     // Must be rgb values
@@ -83,7 +85,12 @@ export default function Home() {
   const changeLetterColor = (color, id) => {
     console.log(`Changing color to: ${color} on id: ${id}`);
     const el = document.getElementById(id)
-    el.style.backgroundColor = color
+    el.style.animation = `.4s linear ${id * .4}s forwards rotate-letter` // id * 4 is the delay between a imations
+    
+    setTimeout(() => {
+      el.style.backgroundColor = color
+    }, 700 * id)
+
   }
 
   const changeKeyColor = (color, letter, greenColor) => {
