@@ -85,11 +85,14 @@ export default function Home() {
   const changeLetterColor = (color, id) => {
     console.log(`Changing color to: ${color} on id: ${id}`);
     const el = document.getElementById(id)
-    el.style.animation = `.4s linear ${id * .4}s forwards rotate-letter` // id * 4 is the delay between a imations
+        
+    // Rotates letters
+    el.style.animation = `.4s linear ${id * .4}s forwards rotate-letter` // id * 4 is the delay between animations
     
+    // Changes color after rotating
     setTimeout(() => {
       el.style.backgroundColor = color
-    }, 700 * id)
+    }, 400 * id + 400)
 
   }
 
