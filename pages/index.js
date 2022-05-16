@@ -124,7 +124,11 @@ export default function Home() {
   const checkGameOver = (row, attempts, clickableMethod) => {
     if (row === attempts) {
       console.log("Game Over!");
-      displayAlert("Nice try!", setAlert)
+      // Waits for letter animation to finish before displaying alert
+      setTimeout(() => {
+        displayAlert("Nice try!", setAlert)
+      }, 400 * wordToGuess.length)
+
       clickableMethod(false)
     }
   }
