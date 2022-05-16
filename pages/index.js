@@ -33,18 +33,18 @@ export default function Home() {
     checkGameOver(guessRow, attempts, setClickable)
   }, [guessRow])
 
-  const submitGuess = () => {
+  const submitGuess = async () => {
     console.log("Guessing...")
     if (guessedWord.length === wordToGuess.length) {
       console.log("guess matches word length")
       // TODO: Check if word is a legit word
         // If legit word: check if the letters belongs to word
-          checkLetters(guessedWord, wordToGuess, numOfWordsGuessed)
-          setNumOfWordsGuessed(numOfWordsGuessed + 1)
-          checkWin(guessedWord, wordToGuess, setClickable)
-          setAllGuesses(prevState => [...prevState, guessedWord])
-          setGuessedWord([])
-          setGuessRow(prevState => prevState + 1)  
+      checkLetters(guessedWord, wordToGuess, numOfWordsGuessed)
+      setNumOfWordsGuessed(numOfWordsGuessed + 1)
+      checkWin(guessedWord, wordToGuess, setClickable)
+      setAllGuesses(prevState => [...prevState, guessedWord])
+      setGuessedWord([])
+      setGuessRow(prevState => prevState + 1)  
 
       // TODO: If not legit word: show alert
 
@@ -54,38 +54,39 @@ export default function Home() {
   }
 
   const displayAlert = (message, alertSetter) => {
+    console.log("Displaying alert");
     alertSetter(message)
     setTimeout(() => alertSetter(''), 1500)
   }
 
   const checkLetters = (guess, word, numOfGuesses) => {
-    guess.forEach((letter, i) => {
-      let indexFound = word.indexOf(letter)
-      let guessIndex = guess.indexOf(letter, i)
-      let elementId = numOfGuesses * 5 + guessIndex
-      if (indexFound >= 0) {
-        // Letter has been found
-        if (guessIndex === indexFound) {
-          console.log(`${letter} is in the correct place`)
-          changeLetterColor(colors.green, elementId)
-          changeKeyColor(colors.green, letter, colors.green)
+      guess.forEach((letter, i) => {
+        let indexFound = word.indexOf(letter)
+        let guessIndex = guess.indexOf(letter, i)
+        let elementId = numOfGuesses * 5 + guessIndex
+        if (indexFound >= 0) {
+          // Letter has been found
+          if (guessIndex === indexFound) {
+            console.log(`${letter} is in the correct place`)
+            changeLetterColor(colors.green, elementId)
+            changeKeyColor(colors.green, letter, colors.green)
+          } else {
+            console.log(`${letter} is in the wrong place`)
+            changeLetterColor(colors.yellow, elementId)
+            changeKeyColor(colors.yellow, letter, colors.green)
+          }
         } else {
-          console.log(`${letter} is in the wrong place`)
-          changeLetterColor(colors.yellow, elementId)
-          changeKeyColor(colors.yellow, letter, colors.green)
+          console.log(`${letter} not found`)
+          changeLetterColor(colors.gray, elementId)
+          changeKeyColor(colors.gray, letter, colors.green)
         }
-      } else {
-        console.log(`${letter} not found`)
-        changeLetterColor(colors.gray, elementId)
-        changeKeyColor(colors.gray, letter, colors.green)
-      }
-    })
+      })
   }
 
   const changeLetterColor = (color, id) => {
     console.log(`Changing color to: ${color} on id: ${id}`);
     const el = document.getElementById(id)
-        
+
     // Rotates letters
     el.style.animation = `.4s linear ${id * .4}s forwards rotate-letter` // id * 4 is the delay between animations
     
@@ -93,6 +94,7 @@ export default function Home() {
     setTimeout(() => {
       el.style.backgroundColor = color
     }, 400 * id + 400)
+
 
   }
 
@@ -109,9 +111,11 @@ export default function Home() {
     console.log("Checking win condition...");
 
     if (guess.join('') === word.join('')) {
-      displayAlert("You win!", setAlert)
+      // Waits for letter animation to finish before displaying message
+      setTimeout(() => {
+        displayAlert("You win!", setAlert)
+      }, 400 * wordToGuess.length)
       clickableMethod(false)
-      // TODO: Make buttons unclickable
     } else {
       console.log("Wrong guess");
     }
