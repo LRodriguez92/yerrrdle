@@ -68,32 +68,32 @@ export default function Home() {
           // Letter has been found
           if (guessIndex === indexFound) {
             console.log(`${letter} is in the correct place`)
-            changeLetterColor(colors.green, elementId)
+            changeLetterColor(colors.green, elementId, i)
             changeKeyColor(colors.green, letter, colors.green)
           } else {
             console.log(`${letter} is in the wrong place`)
-            changeLetterColor(colors.yellow, elementId)
+            changeLetterColor(colors.yellow, elementId, i)
             changeKeyColor(colors.yellow, letter, colors.green)
           }
         } else {
           console.log(`${letter} not found`)
-          changeLetterColor(colors.gray, elementId)
+          changeLetterColor(colors.gray, elementId, i)
           changeKeyColor(colors.gray, letter, colors.green)
         }
       })
   }
 
-  const changeLetterColor = (color, id) => {
+  const changeLetterColor = (color, id, index) => {
     console.log(`Changing color to: ${color} on id: ${id}`);
     const el = document.getElementById(id)
 
     // Rotates letters
-    el.style.animation = `.4s linear ${id * .4}s forwards rotate-letter` // id * 4 is the delay between animations
+    el.style.animation = `.4s linear ${index * .4}s forwards rotate-letter` // id * 4 is the delay between animations
     
     // Changes color after rotating
     setTimeout(() => {
       el.style.backgroundColor = color
-    }, 400 * id + 400)
+    }, 400 * index + 400)
 
 
   }
