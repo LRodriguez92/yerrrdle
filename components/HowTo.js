@@ -26,13 +26,13 @@ export default function HowTo(props) {
                         <br />
                         <p className="font-bold">Examples</p>
                         <br />
-                        <Image src={"/assets/facts.png"} width="260" height="50" />
+                        <Image src={"/assets/facts.png"} width="260" height="50" alt="facts image" />
                         <p>The letter <span className="font-bold">F</span> is in the word and in the correct spot</p>
                         <br />
-                        <Image src={"/assets/block.png"} width="260" height="50" />
+                        <Image src={"/assets/block.png"} width="260" height="50" alt="block image" />
                         <p>The letter <span className="font-bold">C</span> is in the word but in the wrong spot</p>
                         <br />
-                        <Image src={"/assets/ounce.png"} width="260" height="50" />
+                        <Image src={"/assets/ounce.png"} width="260" height="50" alt="ounce image" />
                         <p>The letter <span className="font-bold">E</span> is not in the word in any spot</p>
                         <br />
                     </div>
