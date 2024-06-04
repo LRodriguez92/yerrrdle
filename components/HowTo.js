@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function HowTo(props) {
     return (
-        <div className="absolute flex justify-center bg-black w-full h-full text-white text-sm z-10">
+        <div className="absolute flex justify-center items-center bg-black w-full h-full text-white text-sm z-10">
             <div className="sm:w-5/12 lg:w-4/12">
                 <div className="flex justify-between items-center p-1 font-bold">
                     <div className="w-6"></div>
