@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react"
+import Head from 'next/head'
+import Image from 'next/image'
+import { useState, useEffect, useCallback } from "react"
 import Nav from '../components/Nav'
 import Board from '../components/Board/Board'
 import KeyBoard from '../components/Keyboard/KeyBoard'
@@ -24,6 +26,19 @@ export default function Home() {
 
   const [howTo, setHowTo] = useState(false)
   const [alert, setAlert] = useState('')
+
+  // Define the checkGameOver function
+  const checkGameOver = useCallback((row, attempts, clickableMethod) => {
+    if (row === attempts) {
+      console.log("Game Over!");
+      // Waits for letter animation to finish before displaying alert
+      setTimeout(() => {
+        displayAlert("Nice try!", setAlert)
+      }, 400 * wordToGuess.length)
+
+      clickableMethod(false)
+    }
+  }, [wordToGuess.length, setAlert])
 
   useEffect(() => {
     // Get the word for the current date
@@ -122,18 +137,6 @@ export default function Home() {
       clickableMethod(false)
     } else {
       console.log("Wrong guess");
-    }
-  }
-
-  const checkGameOver = (row, attempts, clickableMethod) => {
-    if (row === attempts) {
-      console.log("Game Over!");
-      // Waits for letter animation to finish before displaying alert
-      setTimeout(() => {
-        displayAlert("Nice try!", setAlert)
-      }, 400 * wordToGuess.length)
-
-      clickableMethod(false)
     }
   }
 
