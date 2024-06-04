@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { useState, useEffect } from "react"
 import Nav from '../components/Nav'
 import Board from '../components/Board/Board'
