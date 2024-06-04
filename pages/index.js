@@ -35,7 +35,7 @@ export default function Home() {
     setWordToGuess(selectedWord);
 
     checkGameOver(guessRow, attempts, setClickable);
-  }, [guessRow]);
+  }, [guessRow, attempts, checkGameOver]);
 
   const submitGuess = async () => {
     console.log("Guessing...")
